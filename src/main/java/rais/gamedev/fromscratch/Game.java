@@ -2,15 +2,25 @@ package rais.gamedev.fromscratch;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
     public static int width = 300;
     public static int height = width/ 16 * 9;
     public static int scale = 3;
-    public Thread gameThread;
-    public boolean running = false;
-    public JFrame frame;
+
+    private Thread gameThread;
+    private boolean running = false;
+    private JFrame frame;
+
+    // image : is the view that is going to be rendered
+    private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    // we transform our image ( view ) into a pixel array representation
+    // By writing to the pixels array we are going to be able to render each frame of the game
+    private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
@@ -36,8 +46,30 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
         while (this.running){
-            System.out.println("Running ...");
+            update();
+            render();
         }
+    }
+
+    public void update(){
+
+    }
+
+    public void render() {
+        BufferStrategy bs = getBufferStrategy();
+        if (bs == null) {
+            // create the Buffer Strategy if null
+            createBufferStrategy(3);
+            bs = getBufferStrategy();
+        }
+
+        Graphics graphics = bs.getDrawGraphics();
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0,0,getWidth(),getHeight());
+
+        // Dispose of the graphics object and show the buffer
+        graphics.dispose();
+        bs.show();
     }
 
     public static void main(String[] args) {
