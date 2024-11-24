@@ -19,6 +19,8 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private JFrame frame;
 
+    private int xOffset = 0, yOffset = 0;
+
     // image : is the view that is going to be rendered
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     // we transform our image ( view ) into a pixel array representation
@@ -78,7 +80,6 @@ public class Game extends Canvas implements Runnable {
             // calculate the update rate and frame rate every second
             if (System.currentTimeMillis() - timer > 1000) {
                 timer+=1000;
-                System.out.println(updates + " ups, " + frames + " fps");
                 frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
                 frames = 0;
                 updates = 0;
@@ -90,7 +91,8 @@ public class Game extends Canvas implements Runnable {
 
     // Updates game logic
     public void update(){
-
+        xOffset++;
+        yOffset++;
     }
 
     // Renders game frames/views
@@ -103,7 +105,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        screen.render();
+        screen.render(xOffset, yOffset);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
