@@ -1,6 +1,7 @@
 package rais.gamedev.fromscratch;
 
 import rais.gamedev.fromscratch.graphics.Screen;
+import rais.gamedev.fromscratch.unput.KeyBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class Game extends Canvas implements Runnable {
     private Thread gameThread;
     private boolean running = false;
     private JFrame frame;
+    private KeyBoard keyBoard;
 
     private int xOffset = 0, yOffset = 0;
 
@@ -35,6 +37,8 @@ public class Game extends Canvas implements Runnable {
 
         screen = new Screen(width, height);
         frame = new JFrame();
+        keyBoard = new KeyBoard();
+        addKeyListener(keyBoard);
     }
 
     public synchronized void start() {
@@ -91,8 +95,25 @@ public class Game extends Canvas implements Runnable {
 
     // Updates game logic
     public void update(){
-        xOffset++;
-        yOffset++;
+        keyBoard.update();
+        handleMovement();
+//        xOffset++;
+//        yOffset++;
+    }
+
+    private void handleMovement() {
+        if (keyBoard.up) {
+            yOffset--;
+        }
+        if (keyBoard.down) {
+            yOffset++;
+        }
+        if (keyBoard.left) {
+            xOffset--;
+        }
+        if (keyBoard.right) {
+            xOffset++;
+        }
     }
 
     // Renders game frames/views
