@@ -1,9 +1,10 @@
 package rais.gamedev.fromscratch;
 
+import rais.gamedev.fromscratch.entity.mob.Player;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.level.Level;
 import rais.gamedev.fromscratch.level.RandomLevel;
-import rais.gamedev.fromscratch.unput.KeyBoard;
+import rais.gamedev.fromscratch.input.KeyBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,22 +18,18 @@ public class Game extends Canvas implements Runnable {
     public static int height = width/ 16 * 9;
     public static int scale = 3;
     public static String title = "Game";
-
     private Thread gameThread;
     private boolean running = false;
     private JFrame frame;
     private KeyBoard keyBoard;
-
-    private int xOffset = 0, yOffset = 0;
-
     // image : is the view that is going to be rendered
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     // we transform our image ( view ) into a pixel array representation
     // By writing to the pixels array we are going to be able to render each frame of the game
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
     private Screen screen;
     private Level level;
+    private Player player;
 
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
@@ -42,6 +39,7 @@ public class Game extends Canvas implements Runnable {
         level = new RandomLevel(64, 64);
         frame = new JFrame();
         keyBoard = new KeyBoard();
+        player = new Player(keyBoard);
         addKeyListener(keyBoard);
     }
 
@@ -101,23 +99,8 @@ public class Game extends Canvas implements Runnable {
     // Updates game logic
     public void update(){
         keyBoard.update();
-        handleMovement();
+        player.update();
 
-    }
-
-    private void handleMovement() {
-        if (keyBoard.up) {
-            yOffset--;
-        }
-        if (keyBoard.down) {
-            yOffset++;
-        }
-        if (keyBoard.left) {
-            xOffset--;
-        }
-        if (keyBoard.right) {
-            xOffset++;
-        }
     }
 
     // Renders game frames/views
@@ -130,7 +113,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        level.render(xOffset, yOffset, screen);
+        level.render(player.x, player.y, screen);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 

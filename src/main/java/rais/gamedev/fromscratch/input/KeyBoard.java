@@ -1,4 +1,4 @@
-package rais.gamedev.fromscratch.unput;
+package rais.gamedev.fromscratch.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
