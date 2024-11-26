@@ -9,7 +9,7 @@ import rais.gamedev.fromscratch.graphics.Sprite;
 public class Mob extends Entity {
 
     public Sprite sprite;
-    public int direction = 0; // determines the direction to which the player moves ( North, East, South and West )
+    public int direction = 0; // determines the direction to which the playerForward moves ( North, East, South and West )
     public boolean moving = false;
 
     // takes the amount by which the Mob's coordinates change in order to implement movement

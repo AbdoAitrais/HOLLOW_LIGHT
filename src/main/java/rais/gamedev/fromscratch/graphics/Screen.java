@@ -51,17 +51,21 @@ public class Screen {
         }
     }
 
-    public void renderPlayer(int xPosition, int yPosition, Sprite sprite) {
+    public void renderPlayer(int xPosition, int yPosition, Sprite sprite, boolean xFlip, boolean yFlip) {
         xPosition -= xOffset;
         yPosition -= yOffset;
         for (int y = 0; y < sprite.HEIGHT ; y++) {
             int yAbsolute = yPosition + y;
+            int yFlipped = y;
+            if (yFlip) yFlipped = sprite.HEIGHT - 1 - y;
             for (int x = 0; x < sprite.WIDTH; x++) {
                 int xAbsolute = xPosition + x;
+                int xFlipped = x;
                 if (xAbsolute < -sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
-                // renders only the player and leaves the background
-                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[x + y * sprite.WIDTH];
+                if (xFlip) xFlipped = sprite.WIDTH - 1 - x;
+                // renders only the playerForward and leaves the background
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[xFlipped + yFlipped * sprite.WIDTH] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[xFlipped + yFlipped * sprite.WIDTH];
             }
         }
     }
