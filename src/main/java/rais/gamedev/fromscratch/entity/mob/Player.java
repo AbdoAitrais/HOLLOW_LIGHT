@@ -1,5 +1,7 @@
 package rais.gamedev.fromscratch.entity.mob;
 
+import rais.gamedev.fromscratch.graphics.Screen;
+import rais.gamedev.fromscratch.graphics.Sprite;
 import rais.gamedev.fromscratch.input.KeyBoard;
 
 public class Player extends Mob {
@@ -27,8 +29,9 @@ public class Player extends Mob {
         if (xChange != 0 || yChange != 0) move(xChange, yChange);
     }
 
-    public void render() {
-
+    public void render(Screen screen) {
+        screen.renderPlayer(x, y, Sprite.characterUpper);
+        screen.renderPlayer(x, y + Sprite.characterLower.SIZE, Sprite.characterLower);
     }
 
 }

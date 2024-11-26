@@ -10,9 +10,11 @@ public class Sprite {
     public int[] pixels; // pixel representation of the sprite
     private SpriteSheet spriteSheet;
 
-    public static Sprite grass = new Sprite(16, 0,0, SpriteSheet.sprites);
-    public static Sprite water = new Sprite(16, 0, 1, SpriteSheet.sprites);
+    public static Sprite grass = new Sprite(16, 0,0, SpriteSheet.overworld);
+    public static Sprite water = new Sprite(16, 0, 1, SpriteSheet.overworld);
     public static Sprite voidSprite = new Sprite(16, Color.BLACK.getRGB());
+    public static Sprite characterUpper = new Sprite(16, 0,0,SpriteSheet.character);
+    public static Sprite characterLower = new Sprite(16, 0,1,SpriteSheet.character);
 
     // TODO:: Sprite should use width and height to calculate SIZE instead of using jst SIZE to solve the problem of unequal sprite sheet dimensions
     public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {

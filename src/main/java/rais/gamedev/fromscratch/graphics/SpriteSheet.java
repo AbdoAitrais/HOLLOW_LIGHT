@@ -12,7 +12,8 @@ public class SpriteSheet {
     public int height, width;
     public int[] pixels;
 
-    public static SpriteSheet sprites = new SpriteSheet("/textures/gfx/Overworld256.png", 256, 256, 256);
+    public static SpriteSheet overworld = new SpriteSheet("/textures/gfx/Overworld256.png", 256, 256, 256);
+    public static SpriteSheet character = new SpriteSheet("/textures/gfx/character.png", 256, 256, 256);
 
     public SpriteSheet(String path, int size, int width, int height) {
         this.path = path;
