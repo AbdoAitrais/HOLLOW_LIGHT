@@ -1,6 +1,8 @@
 package rais.gamedev.fromscratch;
 
 import rais.gamedev.fromscratch.graphics.Screen;
+import rais.gamedev.fromscratch.level.Level;
+import rais.gamedev.fromscratch.level.RandomLevel;
 import rais.gamedev.fromscratch.unput.KeyBoard;
 
 import javax.swing.*;
@@ -30,12 +32,14 @@ public class Game extends Canvas implements Runnable {
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
     private Screen screen;
+    private Level level;
 
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
 
         screen = new Screen(width, height);
+        level = new RandomLevel(64, 64);
         frame = new JFrame();
         keyBoard = new KeyBoard();
         addKeyListener(keyBoard);
@@ -126,7 +130,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        screen.render(xOffset, yOffset);
+        level.render(xOffset, yOffset, screen);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
