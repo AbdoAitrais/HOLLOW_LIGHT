@@ -37,16 +37,16 @@ public class Screen {
         // adjusting the positions with regard to movement
         xPosition -= xOffset;
         yPosition -= yOffset;
-        for (int y = 0; y < tile.sprite.SIZE ; y++) {
+        for (int y = 0; y < tile.sprite.HEIGHT ; y++) {
             int yAbsolute = yPosition + y;
-            for (int x = 0; x < tile.sprite.SIZE; x++) {
+            for (int x = 0; x < tile.sprite.WIDTH; x++) {
                 int xAbsolute = xPosition + x;
                 // we render one more tile that will be rendered before reaching it
                 // to ensure smooth scrolling through the map
-                if (xAbsolute < -tile.sprite.SIZE || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
+                if (xAbsolute < -tile.sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
 //                System.out.println("xAbs: " + xAbsolute + " , yAbs: " + yAbsolute + " , " +pixels.length + " , " + xAbsolute + yAbsolute * width);
-                pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+                pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.WIDTH];
             }
         }
     }
@@ -54,14 +54,14 @@ public class Screen {
     public void renderPlayer(int xPosition, int yPosition, Sprite sprite) {
         xPosition -= xOffset;
         yPosition -= yOffset;
-        for (int y = 0; y < sprite.SIZE ; y++) {
+        for (int y = 0; y < sprite.HEIGHT ; y++) {
             int yAbsolute = yPosition + y;
-            for (int x = 0; x < sprite.SIZE; x++) {
+            for (int x = 0; x < sprite.WIDTH; x++) {
                 int xAbsolute = xPosition + x;
-                if (xAbsolute < -sprite.SIZE || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
+                if (xAbsolute < -sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
                 // renders only the player and leaves the background
-                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.SIZE] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[x + y * sprite.SIZE];
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[x + y * sprite.WIDTH];
             }
         }
     }
