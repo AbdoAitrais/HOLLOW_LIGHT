@@ -4,7 +4,6 @@ package rais.gamedev.fromscratch.graphics;
 import rais.gamedev.fromscratch.level.tile.Tile;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Screen:
@@ -14,13 +13,9 @@ import java.util.Random;
  */
 public class Screen {
 
-    private final int  MAP_SIZE = 64;
-    private final int MAP_SIZE_MASK = MAP_SIZE -1;
     public int width, height;
     public int xOffset, yOffset; // movement coordinates
     public int[] pixels;
-    public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
-    private Random random = new Random();
 
     public Screen(int width, int height) {
         this.width = width;
