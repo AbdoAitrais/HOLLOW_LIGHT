@@ -3,8 +3,8 @@ package rais.gamedev.fromscratch;
 import rais.gamedev.fromscratch.entity.mob.Player;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.level.Level;
-import rais.gamedev.fromscratch.level.RandomLevel;
 import rais.gamedev.fromscratch.input.KeyBoard;
+import rais.gamedev.fromscratch.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,8 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
 
         screen = new Screen(width, height);
-        level = new RandomLevel(64, 64);
+//        level = new RandomLevel(64, 64);
+        level = new SpawnLevel("src/main/resources/maps/SimpleMap.tmj");
         frame = new JFrame();
         keyBoard = new KeyBoard();
         player = new Player(keyBoard);

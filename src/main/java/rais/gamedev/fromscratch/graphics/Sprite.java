@@ -1,10 +1,12 @@
 package rais.gamedev.fromscratch.graphics;
 
-import java.awt.*;
+import rais.gamedev.fromscratch.level.Level;
+
 import java.util.Arrays;
 
 public class Sprite {
 
+    public final int Id;
     public final int WIDTH;
     public final int HEIGHT;
     public int SIZE;
@@ -12,9 +14,6 @@ public class Sprite {
     public int[] pixels; // pixel representation of the sprite
     protected SpriteSheet spriteSheet;
 
-    public static Sprite grass = new Sprite(16,16, 0,0, SpriteSheet.overworld);
-    public static Sprite water = new Sprite(16,16, 0, 1, SpriteSheet.overworld);
-    public static Sprite voidSprite = new Sprite(16, 16, Color.BLACK.getRGB());
     public static Sprite playerForward = new Sprite(16, 32, 0,2,SpriteSheet.character);
     public static Sprite playerForward_1 = new Sprite(16, 32, 1,2,SpriteSheet.character);
     public static Sprite playerForward_2 = new Sprite(16, 32, 3,2,SpriteSheet.character);
@@ -27,6 +26,7 @@ public class Sprite {
 
 
     public Sprite(int width, int height, int color) {
+        Id = 0;
         WIDTH = width;
         HEIGHT = height;
         SIZE = WIDTH * HEIGHT;
@@ -41,7 +41,9 @@ public class Sprite {
         this.pixels = new int[SIZE];
         this.x = x * WIDTH; // x coordinate times the size of the sprite inside the sprite sheet to get the x inside the sprite sheet
         this.y = y * HEIGHT;
+        this.Id = (x + y * (spriteSheet.width >> Level.TILE_SIZE_SHIFTING)) + 1;
         this.spriteSheet = spriteSheet;
+        System.out.println(Id);
         load();
     }
 

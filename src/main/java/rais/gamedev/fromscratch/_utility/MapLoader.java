@@ -1,4 +1,4 @@
-package rais.gamedev.fromscratch.utility;
+package rais.gamedev.fromscratch._utility;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,7 +14,6 @@ public class MapLoader {
 
     public MapLoader(String path) {
         loadJSON(path);
-        System.out.println("1st tile : " + baseLayerTiles[4]);
     }
 
     private void loadJSON(String path) {

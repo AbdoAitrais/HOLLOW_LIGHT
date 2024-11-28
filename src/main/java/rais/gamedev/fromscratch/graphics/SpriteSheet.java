@@ -7,29 +7,27 @@ import java.util.Objects;
 
 public class SpriteSheet {
 
-    private String path;
-    public final int SIZE;
+    private final String path;
+    public int SIZE;
     public int height, width;
     public int[] pixels;
+    public static SpriteSheet overworld = new SpriteSheet("/textures/gfx/Overworld.png");
+    public static SpriteSheet character = new SpriteSheet("/textures/gfx/character.png");
 
-    public static SpriteSheet overworld = new SpriteSheet("/textures/gfx/Overworld256.png", 256, 256, 256);
-    public static SpriteSheet character = new SpriteSheet("/textures/gfx/character.png", 256, 256, 256);
-
-    public SpriteSheet(String path, int size, int width, int height) {
+    public SpriteSheet(String path) {
         this.path = path;
-        SIZE = size;
-        this.width = width;
-        this.height = height;
-        pixels = new int[width * height];
         load();
     }
 
     private void load() {
         try {
             BufferedImage image = ImageIO.read(Objects.requireNonNull(SpriteSheet.class.getResource(path)));
-            int w = image.getWidth();
-            int h = image.getHeight();
-            image.getRGB(0,0,w,h,pixels,0,w);
+            width = image.getWidth();
+            height = image.getHeight();
+            SIZE = width * height;
+            System.out.println("SIZE11 :" + SIZE);
+            pixels = new int[width * height];
+            image.getRGB(0,0,width,height,pixels,0,width);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
