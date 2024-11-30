@@ -1,0 +1,37 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "SimpleMap.tmj",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/pc/Overworld.tsx": {
+            "scaleInDock": 1
+        },
+        "Overworld.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "SimpleMap.tmj": {
+            "scale": 0.7681640624999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 674.3351131451818,
+                "y": 510.30765319094843
+            }
+        }
+    },
+    "openFiles": [
+        "Overworld.tsx",
+        "SimpleMap.tmj"
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "Overworld.tsx",
+        "SimpleMap.tmj"
+    ]
+}

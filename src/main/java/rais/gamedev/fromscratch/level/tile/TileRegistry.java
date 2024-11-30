@@ -14,7 +14,7 @@ public class TileRegistry {
     static {
         tiles.put(0, new Tile(new Sprite(16, 16, Color.BLACK.getRGB()))); // Void
         tiles.put(1, new Tile(new Sprite(16,16, 0,0, SpriteSheet.overworld))); // Grass
-        tiles.put(284, new Tile( new Sprite(16,16, 3, 7, SpriteSheet.overworld))); // Water
+        tiles.put(284, new WaterTile( new Sprite(16,16, 3, 7, SpriteSheet.overworld))); // Water
         tiles.put(162, new Tile(new Sprite(16,16,1,4,SpriteSheet.overworld))); // road
         tiles.put(122, new Tile(new Sprite(16, 16,1,3,SpriteSheet.overworld))); // roadSide_1
         tiles.put(163, new Tile(new Sprite(16, 16,2,4,SpriteSheet.overworld))); // roadSide_2

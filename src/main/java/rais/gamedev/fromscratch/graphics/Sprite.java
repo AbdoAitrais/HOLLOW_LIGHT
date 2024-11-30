@@ -43,7 +43,6 @@ public class Sprite {
         this.y = y * HEIGHT;
         this.Id = (x + y * (spriteSheet.width >> Level.TILE_SIZE_SHIFTING)) + 1;
         this.spriteSheet = spriteSheet;
-        System.out.println(Id);
         load();
     }
 

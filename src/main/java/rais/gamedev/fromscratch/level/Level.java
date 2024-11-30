@@ -9,7 +9,7 @@ public class Level {
     public static final int TILE_SIZE_SHIFTING = (int) Math.sqrt(TILE_SIZE);
     protected int width, height;
     protected int[] baseLayerTiles;
-    protected int[] objectLayerTiles;
+    protected int[] objectLayerTiles; // TODO:: Add object layer tiles ( requires some Tiled work :( )
 
     public Level(int width, int height) {
         this.width = width;

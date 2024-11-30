@@ -40,7 +40,6 @@ public class Screen {
                 // to ensure smooth scrolling through the map
                 if (xAbsolute < -tile.sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
-//                System.out.println("xAbs: " + xAbsolute + " , yAbs: " + yAbsolute + " , " +pixels.length + " , " + xAbsolute + yAbsolute * width);
                 pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.WIDTH];
             }
         }

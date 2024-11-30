@@ -2,6 +2,7 @@ package rais.gamedev.fromscratch.entity.mob;
 
 import rais.gamedev.fromscratch.entity.Entity;
 import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.level.Level;
 
 /**
  * Mob ( short for mobile ) represents any mobile entity like players, monsters and animals ...
@@ -19,7 +20,7 @@ public class Mob extends Entity {
         if (yChange > 0) direction = Direction.South.ordinal();
         if (yChange < 0) direction = Direction.North.ordinal();
 
-        if (!collision()) {
+        if (!collision(xChange, yChange)) {
             x += xChange;
             y += yChange;
         }
@@ -29,8 +30,10 @@ public class Mob extends Entity {
 
     }
 
-    public boolean collision() {
-        return false;
+    public boolean collision(int xChange, int yChange) {
+        int xNextTile = x + xChange;
+        int yNextTile = y + yChange;
+        return level.getTile(xNextTile >> Level.TILE_SIZE_SHIFTING,yNextTile >> Level.TILE_SIZE_SHIFTING).solid();
     }
 
 }

@@ -40,7 +40,10 @@ public class Game extends Canvas implements Runnable {
         level = new SpawnLevel("src/main/resources/maps/SimpleMap.tmj");
         frame = new JFrame();
         keyBoard = new KeyBoard();
-        player = new Player(keyBoard);
+        Point playerSpawnLocation = new Point(33*Level.TILE_SIZE,49*Level.TILE_SIZE); // TODO:: find out why player x and y correspond to pixels and not tiles
+        System.out.println(playerSpawnLocation);
+        player = new Player(playerSpawnLocation.x, playerSpawnLocation.y,keyBoard);
+        player.init(level);
         addKeyListener(keyBoard);
     }
 

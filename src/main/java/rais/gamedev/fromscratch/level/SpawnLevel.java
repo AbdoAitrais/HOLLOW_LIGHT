@@ -22,7 +22,7 @@ public class SpawnLevel extends Level{
     }
 
     public Tile getTile(int x, int y) {
-        if (x < 0 || x > width || y < 0 || y > height || x + y * width >= baseLayerTiles.length) return TileRegistry.tiles.get(0);
+        if (x < 0 || x >= width || y < 0 || y > height || x + y * width >= baseLayerTiles.length) return TileRegistry.tiles.get(0);
         if (TileRegistry.tiles.get(baseLayerTiles[x + y * width]) != null)
             return TileRegistry.tiles.get(baseLayerTiles[x + y * width]);
         return TileRegistry.tiles.get(0);
