@@ -15,6 +15,13 @@ public class Mob extends Entity {
 
     // takes the amount by which the Mob's coordinates change in order to implement movement
     public void move(int xChange, int yChange) {
+        // we are moving diagonally then move on each access separately
+        if(xChange != 0 && yChange != 0) {
+            move(xChange, 0);
+            move(0, yChange);
+            return;
+        }
+
         if (xChange > 0) direction = Direction.East.ordinal();
         if (xChange < 0) direction = Direction.West.ordinal();
         if (yChange > 0) direction = Direction.South.ordinal();
@@ -31,9 +38,13 @@ public class Mob extends Entity {
     }
 
     public boolean collision(int xChange, int yChange) {
-        int xNextTile = x + xChange;
-        int yNextTile = y + yChange;
-        return level.getTile(xNextTile >> Level.TILE_SIZE_SHIFTING,yNextTile >> Level.TILE_SIZE_SHIFTING).solid();
+        // for every corner
+        for (int corner = 0; corner < 4; corner++) {
+            int xNextTile = ((x + xChange) + corner % 2 * 22 - 3) >> Level.TILE_SIZE_SHIFTING;
+            int yNextTile = ((y + yChange) + corner / 2 * 16 + 12) >> Level.TILE_SIZE_SHIFTING;
+            if (level.getTile(xNextTile, yNextTile).solid()) return true;
+        }
+        return false;
     }
 
 }
