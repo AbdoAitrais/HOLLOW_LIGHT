@@ -14,7 +14,7 @@ public class Tile {
     }
 
     public void render(int x, int y, Screen screen) {
-        screen.renderTile(x << Level.TILE_SIZE_SHIFTING, y << Level.TILE_SIZE_SHIFTING, this);
+        screen.renderTile(x << Level.TILE_SIZE_SHIFTING, y << Level.TILE_SIZE_SHIFTING, this.sprite);
     }
 
     public boolean solid() {

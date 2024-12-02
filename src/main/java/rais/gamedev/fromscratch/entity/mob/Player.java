@@ -1,8 +1,10 @@
 package rais.gamedev.fromscratch.entity.mob;
 
+import rais.gamedev.fromscratch.Game;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.graphics.Sprite;
 import rais.gamedev.fromscratch.input.KeyBoard;
+import rais.gamedev.fromscratch.input.Mouse;
 
 public class Player extends Mob {
 
@@ -36,6 +38,16 @@ public class Player extends Mob {
             walking = true;
             move(xChange, yChange);
         } else walking = false;
+        updateShooting();
+    }
+
+    private void updateShooting() {
+        if (Mouse.getMouseButton() == 1) {
+            double xAdjacent = Mouse.getxMouse() - (double) Game.getWindowWidth() /2;
+            double yOpposite = Mouse.getyMouse() -  (double) Game.getWindowHeight() /2;
+            double angle = Math.atan2(yOpposite, xAdjacent);
+            shoot(x, y, angle);
+        }
     }
 
     public void render(Screen screen) {

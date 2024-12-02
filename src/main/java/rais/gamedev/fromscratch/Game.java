@@ -2,6 +2,7 @@ package rais.gamedev.fromscratch;
 
 import rais.gamedev.fromscratch.entity.mob.Player;
 import rais.gamedev.fromscratch.graphics.Screen;
+import rais.gamedev.fromscratch.input.Mouse;
 import rais.gamedev.fromscratch.level.Level;
 import rais.gamedev.fromscratch.input.KeyBoard;
 import rais.gamedev.fromscratch.level.SpawnLevel;
@@ -14,14 +15,14 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
-    public static int width = 300;
-    public static int height = width/ 16 * 9;
-    public static int scale = 3;
+    private static final int width = 300;
+    private static final int height = width/ 16 * 9;
+    private static final int scale = 3;
     public static String title = "Game";
     private Thread gameThread;
     private boolean running = false;
-    private JFrame frame;
-    private KeyBoard keyBoard;
+    private final JFrame frame;
+    private final KeyBoard keyBoard;
     // image : is the view that is going to be rendered
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     // we transform our image ( view ) into a pixel array representation
@@ -30,6 +31,14 @@ public class Game extends Canvas implements Runnable {
     private Screen screen;
     private Level level;
     private Player player;
+
+    public static int getWindowHeight() {
+        return height * scale;
+    }
+
+    public static int getWindowWidth() {
+        return width * scale;
+    }
 
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
@@ -45,6 +54,9 @@ public class Game extends Canvas implements Runnable {
         player = new Player(playerSpawnLocation.x, playerSpawnLocation.y,keyBoard);
         player.init(level);
         addKeyListener(keyBoard);
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
     }
 
     public synchronized void start() {
@@ -104,6 +116,7 @@ public class Game extends Canvas implements Runnable {
     public void update(){
         keyBoard.update();
         player.update();
+        level.update();
 
     }
 

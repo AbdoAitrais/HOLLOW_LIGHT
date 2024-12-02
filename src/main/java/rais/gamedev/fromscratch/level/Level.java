@@ -1,7 +1,11 @@
 package rais.gamedev.fromscratch.level;
 
+import rais.gamedev.fromscratch.entity.Entity;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.level.tile.Tile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Level {
 
@@ -10,6 +14,7 @@ public class Level {
     protected int width, height;
     protected int[] baseLayerTiles;
     protected int[] objectLayerTiles; // TODO:: Add object layer tiles ( requires some Tiled work :( )
+    public List<Entity> entities = new ArrayList<>();
 
     public Level(int width, int height) {
         this.width = width;
@@ -30,7 +35,9 @@ public class Level {
 
     // updates the level based on entity changes ( creatures .. )
     public void update() {
-
+        for (Entity entity : entities) {
+            entity.update();
+        }
     }
 
     protected void time() {
@@ -51,6 +58,13 @@ public class Level {
                 getTile(x, y).render(x, y, screen);
             }
         }
+        for (Entity entity : entities) {
+            entity.render(screen);
+        }
+    }
+
+    public void add(Entity entity) {
+        entities.add(entity);
     }
 
     public Tile getTile(int x, int y) {

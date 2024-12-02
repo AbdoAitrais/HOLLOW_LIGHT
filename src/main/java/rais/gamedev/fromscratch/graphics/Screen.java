@@ -1,8 +1,6 @@
 package rais.gamedev.fromscratch.graphics;
 
 
-import rais.gamedev.fromscratch.level.tile.Tile;
-
 import java.util.Arrays;
 
 /**
@@ -28,19 +26,19 @@ public class Screen {
     }
 
     // takes the xPosition and yPosition of the tile in the map and renders it
-    public void renderTile(int xPosition, int yPosition, Tile tile) {
+    public void renderTile(int xPosition, int yPosition, Sprite sprite) {
         // adjusting the positions with regard to movement
         xPosition -= xOffset;
         yPosition -= yOffset;
-        for (int y = 0; y < tile.sprite.HEIGHT ; y++) {
+        for (int y = 0; y < sprite.HEIGHT ; y++) {
             int yAbsolute = yPosition + y;
-            for (int x = 0; x < tile.sprite.WIDTH; x++) {
+            for (int x = 0; x < sprite.WIDTH; x++) {
                 int xAbsolute = xPosition + x;
                 // we render one more tile that will be rendered before reaching it
                 // to ensure smooth scrolling through the map
-                if (xAbsolute < -tile.sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
+                if (xAbsolute < -sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
-                pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.WIDTH];
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH];
             }
         }
     }
@@ -60,6 +58,21 @@ public class Screen {
                 if (xFlip) xFlipped = sprite.WIDTH - 1 - x;
                 // renders only the playerForward and leaves the background
                 pixels[xAbsolute + yAbsolute * width] = sprite.pixels[xFlipped + yFlipped * sprite.WIDTH] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[xFlipped + yFlipped * sprite.WIDTH];
+            }
+        }
+    }
+
+    public void renderObject(int xPosition, int yPosition, Sprite sprite) {
+        xPosition -= xOffset;
+        yPosition -= yOffset;
+        for (int y = 0; y < sprite.HEIGHT ; y++) {
+            int yAbsolute = yPosition + y;
+            for (int x = 0; x < sprite.WIDTH; x++) {
+                int xAbsolute = xPosition + x;
+                if (xAbsolute < -sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
+                if (xAbsolute < 0) xAbsolute = 0;
+                // renders only the playerForward and leaves the background
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH] == 0x000000 ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[x + y * sprite.WIDTH];
             }
         }
     }

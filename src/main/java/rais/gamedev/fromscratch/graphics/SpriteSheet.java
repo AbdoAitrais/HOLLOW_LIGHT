@@ -13,6 +13,7 @@ public class SpriteSheet {
     public int[] pixels;
     public static SpriteSheet overworld = new SpriteSheet("/textures/gfx/Overworld.png");
     public static SpriteSheet character = new SpriteSheet("/textures/gfx/character.png");
+    public static SpriteSheet gameObjects = new SpriteSheet("/textures/gfx/objects.png");
 
     public SpriteSheet(String path) {
         this.path = path;
