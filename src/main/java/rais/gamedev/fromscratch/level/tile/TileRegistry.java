@@ -38,6 +38,8 @@ public class TileRegistry {
         tiles.put(364, new Tile(new Sprite(16, 16,3,9,SpriteSheet.overworld))); // grassWaterSide_6
         tiles.put(404, new Tile(new Sprite(16, 16,3,10,SpriteSheet.overworld))); // grassWaterSide_7
         tiles.put(403, new Tile(new Sprite(16, 16,2,10,SpriteSheet.overworld))); // grassWaterSide_8
+        tiles.put(646, new Tile(new Sprite(16, 16,5,16,SpriteSheet.overworld))); // grassWaterSide_8
+
 
     }
 }

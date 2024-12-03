@@ -9,29 +9,48 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "C:/Users/pc/Overworld.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 2,
+            "scaleInEditor": 1
         },
         "Overworld.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "SimpleMap.tmj": {
-            "scale": 0.7681640624999999,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 674.3351131451818,
-                "y": 510.30765319094843
+                "x": 266.66666666666663,
+                "y": 168.66666666666666
             }
+        },
+        "SimpleMap.tmj#Overworld": {
+            "scaleInDock": 1
         }
     },
+    "last.exportedFilePath": "C:/Users/pc/IdeaProjects/GAME_DEV_FROM_SCRATCH/src/main/resources/maps",
+    "last.externalTilesetPath": "C:/Users/pc/IdeaProjects/GAME_DEV_FROM_SCRATCH/src/main/resources/maps",
+    "last.imagePath": "C:/Users/pc/IdeaProjects/GAME_DEV_FROM_SCRATCH/src/main/resources/textures/gfx",
+    "map.lastUsedExportFilter": "All Files (*)",
     "openFiles": [
-        "Overworld.tsx",
         "SimpleMap.tmj"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "SimpleMap.tmj",
         "Overworld.tsx",
-        "SimpleMap.tmj"
-    ]
+        "C:/Users/pc/Overworld.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }

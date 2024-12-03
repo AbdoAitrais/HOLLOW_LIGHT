@@ -13,7 +13,7 @@ public class Level {
     public static final int TILE_SIZE_SHIFTING = (int) Math.sqrt(TILE_SIZE);
     protected int width, height;
     protected int[] baseLayerTiles;
-    protected int[] objectLayerTiles; // TODO:: Add object layer tiles ( requires some Tiled work :( )
+    protected int[] secondLayerTiles;
     public List<Entity> entities = new ArrayList<>();
 
     public Level(int width, int height) {
@@ -56,6 +56,8 @@ public class Level {
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
                 getTile(x, y).render(x, y, screen);
+                if (getSecondLayerTile(x,y) != null)
+                    getSecondLayerTile(x,y).render(x,y,screen);
             }
         }
         for (Entity entity : entities) {
@@ -68,6 +70,10 @@ public class Level {
     }
 
     public Tile getTile(int x, int y) {
+        return null;
+    }
+
+    public Tile getSecondLayerTile(int x, int y) {
         return null;
     }
 

@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 public class MapLoader {
     public int width,height;
     public int[] baseLayerTiles;
-    public int[] objectLayerTiles;
+    public int[] secondLayerTiles;
 
     public MapLoader(String path) {
         loadJSON(path);
@@ -33,10 +33,10 @@ public class MapLoader {
                 System.out.println("No object layer detected ");
                 return;
             }
-            objectLayerTiles = new int[width * height];
+            secondLayerTiles = new int[width * height];
             JSONArray objectLayer = jsonObject.getJSONArray("layers").getJSONObject(1).getJSONArray("data");
 
-            parseTiles(objectLayer,objectLayerTiles);
+            parseTiles(objectLayer, secondLayerTiles);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

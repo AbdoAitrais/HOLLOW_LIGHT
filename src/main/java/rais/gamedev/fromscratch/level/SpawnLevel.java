@@ -17,8 +17,10 @@ public class SpawnLevel extends Level{
         this.height = mapLoader.height;
         this.baseLayerTiles = new int[width * height];
         System.arraycopy(mapLoader.baseLayerTiles, 0, this.baseLayerTiles, 0, mapLoader.baseLayerTiles.length);
-        if (mapLoader.objectLayerTiles != null)
-            System.arraycopy(mapLoader.objectLayerTiles, 0,this.objectLayerTiles,0,mapLoader.objectLayerTiles.length);
+        if (mapLoader.secondLayerTiles != null) {
+            this.secondLayerTiles = new int[width*height];
+            System.arraycopy(mapLoader.secondLayerTiles, 0, this.secondLayerTiles, 0, mapLoader.secondLayerTiles.length);
+        }
     }
 
     public Tile getTile(int x, int y) {
@@ -26,5 +28,12 @@ public class SpawnLevel extends Level{
         if (TileRegistry.tiles.get(baseLayerTiles[x + y * width]) != null)
             return TileRegistry.tiles.get(baseLayerTiles[x + y * width]);
         return TileRegistry.tiles.get(0);
+    }
+
+    public Tile getSecondLayerTile(int x, int y) {
+        if (x < 0 || x >= width || y < 0 || y > height || x + y * width >= baseLayerTiles.length) return null;
+        if (secondLayerTiles[x + y * width] != 0 && TileRegistry.tiles.get(secondLayerTiles[x + y * width]) != null)
+            return TileRegistry.tiles.get(secondLayerTiles[x + y * width]);
+        return null;
     }
 }

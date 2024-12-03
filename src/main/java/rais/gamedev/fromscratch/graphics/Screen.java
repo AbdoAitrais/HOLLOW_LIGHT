@@ -38,7 +38,7 @@ public class Screen {
                 // to ensure smooth scrolling through the map
                 if (xAbsolute < -sprite.WIDTH || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) break;
                 if (xAbsolute < 0) xAbsolute = 0;
-                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH];
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * sprite.WIDTH] == 0x000000 ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[x + y * sprite.WIDTH];
             }
         }
     }
