@@ -4,12 +4,13 @@ import rais.gamedev.fromscratch.graphics.Sprite;
 
 public class FireBolt extends Projectile {
 
+    public static final int FIRE_RATE = 10; // higher slower
+
     public FireBolt(int x, int y, double angle) {
         super(x, y, angle);
-        range = 200;
-        speed = 1.4;
+        range = 5000;
+        speed = 2;
         damage = 20;
-        fireRate = 15;
         sprite = Sprite.fire;
         xNew = Math.cos(this.angle) * speed; // rate at which the projectile travels with x Axis
         yNew = Math.sin(this.angle) * speed; // rate at which the projectile travels with y Axis
@@ -17,6 +18,7 @@ public class FireBolt extends Projectile {
 
     public void update() {
         move();
+        if (distance() > range) setRemoved(true);
     }
 
     public void move() {

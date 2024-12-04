@@ -5,11 +5,12 @@ import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.graphics.Sprite;
 
 public abstract class Projectile extends Entity {
+    protected double x, y;
     protected final int xOrigin, yOrigin;
     protected double angle;
     protected Sprite sprite;
     protected double xNew, yNew;
-    protected double speed, fireRate, range, damage;
+    protected double speed, range, damage;
 
     public Projectile(int x, int y, double angle) {
         xOrigin = x;
@@ -23,7 +24,12 @@ public abstract class Projectile extends Entity {
 
     }
 
+    protected double distance() {
+        // Euclidean distance between origin of the projectile and current position
+        return (x - xOrigin) * (x - xOrigin) + (y - yOrigin) * (y - yOrigin);
+    }
+
     public void render(Screen screen) {
-        screen.renderObject(x, y, sprite);
+        screen.renderObject((int) x - 1, (int) y + 10, sprite);
     }
 }

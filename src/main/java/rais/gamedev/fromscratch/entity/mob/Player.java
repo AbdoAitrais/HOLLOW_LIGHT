@@ -1,6 +1,8 @@
 package rais.gamedev.fromscratch.entity.mob;
 
 import rais.gamedev.fromscratch.Game;
+import rais.gamedev.fromscratch.entity.projectile.FireBolt;
+import rais.gamedev.fromscratch.entity.projectile.Projectile;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.graphics.Sprite;
 import rais.gamedev.fromscratch.input.KeyBoard;
@@ -13,9 +15,12 @@ public class Player extends Mob {
     private int animate = 0;
     private boolean walking = false;
 
+    private int fireRate; //  represents a gun
+
     public Player(KeyBoard keyBoardInput) {
         this.keyBoardInput = keyBoardInput;
         sprite = Sprite.playerForward;
+        fireRate = FireBolt.FIRE_RATE;
     }
 
     public Player(int x, int y, KeyBoard keyBoardInput) {
@@ -38,15 +43,28 @@ public class Player extends Mob {
             walking = true;
             move(xChange, yChange);
         } else walking = false;
+        for (Projectile projectile: projectiles) {
+            projectile.update();
+        }
         updateShooting();
+        removeProjectiles();
     }
 
     private void updateShooting() {
-        if (Mouse.getMouseButton() == 1) {
+        if (fireRate > 0) fireRate--;
+        if (Mouse.getMouseButton() == 1 && fireRate == 0) {
             double xAdjacent = Mouse.getxMouse() - (double) Game.getWindowWidth() /2;
             double yOpposite = Mouse.getyMouse() -  (double) Game.getWindowHeight() /2;
             double angle = Math.atan2(yOpposite, xAdjacent);
             shoot(x, y, angle);
+            fireRate = FireBolt.FIRE_RATE;
+        }
+    }
+
+    private void removeProjectiles() {
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile projectile = projectiles.get(i);
+            if (projectile.isRemoved()) projectiles.remove(projectile);
         }
     }
 
@@ -69,6 +87,9 @@ public class Player extends Mob {
             xFlip = true;
         }
         screen.renderPlayer(x, y, sprite, xFlip, yFlip);
+        for (Projectile projectile: projectiles) {
+            projectile.render(screen);
+        }
     }
 
 }

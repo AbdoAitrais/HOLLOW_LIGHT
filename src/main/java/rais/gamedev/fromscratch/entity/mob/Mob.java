@@ -43,7 +43,6 @@ public class Mob extends Entity {
 //        System.out.println(Math.toDegrees(angle));
         Projectile projectile = new FireBolt(xO, yO, angle);
         projectiles.add(projectile);
-        level.add(projectile);
     }
 
     public void render() {
