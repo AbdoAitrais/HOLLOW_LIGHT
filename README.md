@@ -1,6 +1,6 @@
 # **GAME DEV FROM SCRATCH**
 
-![Game Screenshot](path/to/screenshot.png) <!-- Replace with the actual path to a screenshot of your game -->
+![Game Screenshot](src/main/resources/screenshots/game.png) <!-- Replace with the actual path to a screenshot of your game -->
 
 ## **Overview**
 
