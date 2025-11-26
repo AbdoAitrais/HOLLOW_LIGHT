@@ -24,8 +24,9 @@ public class Sprite {
     public static Sprite playerSide_1 = new Sprite(16, 32, 1,1,SpriteSheet.character);
     public static Sprite playerSide_2 = new Sprite(16, 32, 3,1,SpriteSheet.character);
 
-
     public static Sprite fire = new Sprite(16,16,11,3,SpriteSheet.gameObjects);
+
+    public static Sprite log_monster = new Sprite(32,32,0,0,SpriteSheet.log);
 
     public Sprite(int width, int height, int color) {
         Id = 0;

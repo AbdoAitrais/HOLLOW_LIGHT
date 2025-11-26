@@ -14,6 +14,7 @@ public class SpriteSheet {
     public static SpriteSheet overworld = new SpriteSheet("/textures/gfx/Overworld.png");
     public static SpriteSheet character = new SpriteSheet("/textures/gfx/character.png");
     public static SpriteSheet gameObjects = new SpriteSheet("/textures/gfx/objects.png");
+    public static SpriteSheet log = new SpriteSheet("/textures/gfx/log.png");
 
     public SpriteSheet(String path) {
         this.path = path;

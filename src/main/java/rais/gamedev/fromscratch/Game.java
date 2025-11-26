@@ -1,5 +1,6 @@
 package rais.gamedev.fromscratch;
 
+import rais.gamedev.fromscratch.entity.mob.MonsterLog;
 import rais.gamedev.fromscratch.entity.mob.Player;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.input.Mouse;
@@ -31,6 +32,7 @@ public class Game extends Canvas implements Runnable {
     private Screen screen;
     private Level level;
     private Player player;
+    private MonsterLog monster;
 
     public static int getWindowHeight() {
         return height * scale;
@@ -50,9 +52,12 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         keyBoard = new KeyBoard();
         Point playerSpawnLocation = new Point(33*Level.TILE_SIZE,49*Level.TILE_SIZE); // TODO:: find out why player x and y correspond to pixels and not tiles
-        System.out.println(playerSpawnLocation);
+        Point monsterSpawnLocation = new Point(32*Level.TILE_SIZE,48*Level.TILE_SIZE);
+//        System.out.println(playerSpawnLocation);
+        monster = new MonsterLog(monsterSpawnLocation.x,monsterSpawnLocation.y);
         player = new Player(playerSpawnLocation.x, playerSpawnLocation.y,keyBoard);
         player.init(level);
+        monster.init(level);
         addKeyListener(keyBoard);
         Mouse mouse = new Mouse();
         addMouseListener(mouse);
@@ -116,6 +121,7 @@ public class Game extends Canvas implements Runnable {
     public void update(){
         keyBoard.update();
         player.update();
+        monster.update();
         level.update();
 
     }
@@ -134,6 +140,7 @@ public class Game extends Canvas implements Runnable {
         int yScroll = player.y - height/2;
         level.render(xScroll, yScroll, screen);
         player.render(screen);
+        monster.render(screen);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 

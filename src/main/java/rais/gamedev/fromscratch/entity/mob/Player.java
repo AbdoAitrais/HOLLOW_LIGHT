@@ -86,7 +86,7 @@ public class Player extends Mob {
         } else if (direction == Direction.West.ordinal()) {
             xFlip = true;
         }
-        screen.renderPlayer(x, y, sprite, xFlip, yFlip);
+        screen.renderMob(x, y, sprite, xFlip, yFlip, 0xffffff);
         for (Projectile projectile: projectiles) {
             projectile.render(screen);
         }

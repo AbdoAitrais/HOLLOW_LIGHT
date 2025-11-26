@@ -43,7 +43,7 @@ public class Screen {
         }
     }
 
-    public void renderPlayer(int xPosition, int yPosition, Sprite sprite, boolean xFlip, boolean yFlip) {
+    public void renderMob(int xPosition, int yPosition, Sprite sprite, boolean xFlip, boolean yFlip, int spriteBackgroundColor) {
         xPosition -= xOffset;
         yPosition -= yOffset;
         for (int y = 0; y < sprite.HEIGHT ; y++) {
@@ -57,7 +57,7 @@ public class Screen {
                 if (xAbsolute < 0) xAbsolute = 0;
                 if (xFlip) xFlipped = sprite.WIDTH - 1 - x;
                 // renders only the playerForward and leaves the background
-                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[xFlipped + yFlipped * sprite.WIDTH] == 0xffffff ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[xFlipped + yFlipped * sprite.WIDTH];
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[xFlipped + yFlipped * sprite.WIDTH] == spriteBackgroundColor ? pixels[xAbsolute + yAbsolute * width] : sprite.pixels[xFlipped + yFlipped * sprite.WIDTH];
             }
         }
     }
