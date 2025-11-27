@@ -1,5 +1,6 @@
-package rais.gamedev.fromscratch.graphics;
+package rais.gamedev.fromscratch.graphics.sprites;
 
+import rais.gamedev.fromscratch.graphics.SpriteSheet;
 import rais.gamedev.fromscratch.level.Level;
 
 import java.util.Arrays;
@@ -13,20 +14,6 @@ public class Sprite {
     protected int x, y; // sprite coordinates in the sprite sheet
     public int[] pixels; // pixel representation of the sprite
     protected SpriteSheet spriteSheet;
-
-    public static Sprite playerForward = new Sprite(16, 32, 0,2,SpriteSheet.character);
-    public static Sprite playerForward_1 = new Sprite(16, 32, 1,2,SpriteSheet.character);
-    public static Sprite playerForward_2 = new Sprite(16, 32, 3,2,SpriteSheet.character);
-    public static Sprite playerBackward = new Sprite(16, 32, 0,0,SpriteSheet.character);
-    public static Sprite playerBackward_1 = new Sprite(16, 32, 1,0,SpriteSheet.character);
-    public static Sprite playerBackward_2 = new Sprite(16, 32, 3,0,SpriteSheet.character);
-    public static Sprite playerSide = new Sprite(16, 32, 0,1,SpriteSheet.character);
-    public static Sprite playerSide_1 = new Sprite(16, 32, 1,1,SpriteSheet.character);
-    public static Sprite playerSide_2 = new Sprite(16, 32, 3,1,SpriteSheet.character);
-
-    public static Sprite fire = new Sprite(16,16,11,3,SpriteSheet.gameObjects);
-
-    public static Sprite log_monster = new Sprite(32,32,0,0,SpriteSheet.log);
 
     public Sprite(int width, int height, int color) {
         Id = 0;

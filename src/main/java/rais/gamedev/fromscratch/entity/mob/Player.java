@@ -4,7 +4,8 @@ import rais.gamedev.fromscratch.Game;
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.entity.projectile.Projectile;
 import rais.gamedev.fromscratch.graphics.Screen;
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.PlayerSprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 import rais.gamedev.fromscratch.input.KeyBoard;
 import rais.gamedev.fromscratch.input.Mouse;
 
@@ -19,7 +20,7 @@ public class Player extends Mob {
 
     public Player(KeyBoard keyBoardInput) {
         this.keyBoardInput = keyBoardInput;
-        sprite = Sprite.playerForward;
+        sprite = PlayerSprite.playerForward;
         fireRate = FireBolt.FIRE_RATE;
     }
 
@@ -27,7 +28,7 @@ public class Player extends Mob {
         this.x = x;
         this.y = y;
         this.keyBoardInput = keyBoardInput;
-        sprite = Sprite.playerForward;
+        sprite = PlayerSprite.playerForward;
     }
 
     public void update() {
@@ -71,18 +72,18 @@ public class Player extends Mob {
     public void render(Screen screen) {
         boolean xFlip = false, yFlip = false;
 
-        if (animate % 20 > 10 && walking) sprite = Sprite.playerSide_1;
-        else if (!walking) sprite = Sprite.playerSide;
-        else sprite = Sprite.playerSide_2;
+        if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerSide_1;
+        else if (!walking) sprite = PlayerSprite.playerSide;
+        else sprite = PlayerSprite.playerSide_2;
 
         if (direction == Direction.North.ordinal()) {
-            if (animate % 20 > 10 && walking) sprite = Sprite.playerForward_1;
-            else if (!walking) sprite = Sprite.playerForward;
-            else sprite = Sprite.playerForward_2;
+            if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerForward_1;
+            else if (!walking) sprite = PlayerSprite.playerForward;
+            else sprite = PlayerSprite.playerForward_2;
         } else if (direction == Direction.South.ordinal()) {
-            if (animate % 20 > 10 && walking) sprite = Sprite.playerBackward_1;
-            else if (!walking) sprite = Sprite.playerBackward;
-            else sprite = Sprite.playerBackward_2;
+            if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerBackward_1;
+            else if (!walking) sprite = PlayerSprite.playerBackward;
+            else sprite = PlayerSprite.playerBackward_2;
         } else if (direction == Direction.West.ordinal()) {
             xFlip = true;
         }

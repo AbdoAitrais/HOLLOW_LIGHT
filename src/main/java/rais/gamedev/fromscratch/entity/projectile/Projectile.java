@@ -2,7 +2,7 @@ package rais.gamedev.fromscratch.entity.projectile;
 
 import rais.gamedev.fromscratch.entity.Entity;
 import rais.gamedev.fromscratch.graphics.Screen;
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 
 public abstract class Projectile extends Entity {
     protected double x, y;

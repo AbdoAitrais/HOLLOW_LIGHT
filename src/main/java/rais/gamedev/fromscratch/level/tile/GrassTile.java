@@ -1,7 +1,6 @@
 package rais.gamedev.fromscratch.level.tile;
 
-import rais.gamedev.fromscratch.graphics.Screen;
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 
 public class GrassTile extends Tile {
 

@@ -2,7 +2,8 @@ package rais.gamedev.fromscratch.entity.mob;
 
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.graphics.Screen;
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.LogMonsterSprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 
 import java.util.Random;
 
@@ -13,14 +14,14 @@ public class MonsterLog extends Mob {
     private int fireRate; //  represents a gun
 
     public MonsterLog() {
-        sprite = Sprite.log_monster;
+        sprite = LogMonsterSprite.log_monster;
         fireRate = FireBolt.FIRE_RATE;
     }
 
     public MonsterLog(int x, int y) {
         this.x = x;
         this.y = y;
-        sprite = Sprite.log_monster;
+        sprite = LogMonsterSprite.log_monster;
     }
 
     public void update() {
@@ -42,9 +43,9 @@ public class MonsterLog extends Mob {
     public void render(Screen screen) {
         boolean xFlip = false, yFlip = false;
 
-        if (animate % 20 > 10 && walking) sprite = Sprite.log_monster;
-        else if (!walking) sprite = Sprite.log_monster;
-        else sprite = Sprite.log_monster;
+        if (animate % 20 > 10 && walking) sprite = LogMonsterSprite.log_monster;
+        else if (!walking) sprite = LogMonsterSprite.log_monster;
+        else sprite = LogMonsterSprite.log_monster;
 
 //        if (direction == Direction.North.ordinal()) {
 //            if (animate % 20 > 10 && walking) sprite = Sprite.playerForward_1;

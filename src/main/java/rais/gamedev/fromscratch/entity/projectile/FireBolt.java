@@ -1,6 +1,6 @@
 package rais.gamedev.fromscratch.entity.projectile;
 
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.SpellSprite;
 
 public class FireBolt extends Projectile {
 
@@ -11,7 +11,7 @@ public class FireBolt extends Projectile {
         range = 5000;
         speed = 2;
         damage = 20;
-        sprite = Sprite.fire;
+        sprite = SpellSprite.fire;
         xNew = Math.cos(this.angle) * speed; // rate at which the projectile travels with x Axis
         yNew = Math.sin(this.angle) * speed; // rate at which the projectile travels with y Axis
     }

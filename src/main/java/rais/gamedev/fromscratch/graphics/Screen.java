@@ -1,6 +1,8 @@
 package rais.gamedev.fromscratch.graphics;
 
 
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
+
 import java.util.Arrays;
 
 /**

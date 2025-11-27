@@ -1,6 +1,6 @@
 package rais.gamedev.fromscratch.level.tile;
 
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 
 public class VoidTile extends Tile {
 

@@ -3,7 +3,7 @@ package rais.gamedev.fromscratch.entity.mob;
 import rais.gamedev.fromscratch.entity.Entity;
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.entity.projectile.Projectile;
-import rais.gamedev.fromscratch.graphics.Sprite;
+import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 import rais.gamedev.fromscratch.level.Level;
 
 import java.util.ArrayList;
