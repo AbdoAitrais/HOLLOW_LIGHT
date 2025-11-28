@@ -1,7 +1,7 @@
 package rais.gamedev.fromscratch;
 
-import rais.gamedev.fromscratch.entity.mob.MonsterLog;
-import rais.gamedev.fromscratch.entity.mob.Player;
+import rais.gamedev.fromscratch.entity.mob.monster.MonsterLog;
+import rais.gamedev.fromscratch.entity.mob.player.Player;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.input.Mouse;
 import rais.gamedev.fromscratch.level.Level;

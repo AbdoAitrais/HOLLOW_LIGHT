@@ -1,6 +1,8 @@
-package rais.gamedev.fromscratch.entity.mob;
+package rais.gamedev.fromscratch.entity.mob.player;
 
 import rais.gamedev.fromscratch.Game;
+import rais.gamedev.fromscratch.entity.mob.Direction;
+import rais.gamedev.fromscratch.entity.mob.Mob;
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.entity.projectile.Projectile;
 import rais.gamedev.fromscratch.graphics.Screen;

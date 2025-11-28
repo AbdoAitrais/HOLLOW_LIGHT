@@ -1,5 +1,7 @@
-package rais.gamedev.fromscratch.entity.mob;
+package rais.gamedev.fromscratch.entity.mob.monster;
 
+import rais.gamedev.fromscratch.entity.mob.Direction;
+import rais.gamedev.fromscratch.entity.mob.Mob;
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.graphics.sprites.LogMonsterSprite;
@@ -12,6 +14,7 @@ public class MonsterLog extends Mob {
     private int animate = 0;
     private boolean walking = false;
     private int fireRate; //  represents a gun
+    private int aggroDistance;
 
     public MonsterLog() {
         sprite = LogMonsterSprite.log_monster;
@@ -43,21 +46,21 @@ public class MonsterLog extends Mob {
     public void render(Screen screen) {
         boolean xFlip = false, yFlip = false;
 
-        if (animate % 20 > 10 && walking) sprite = LogMonsterSprite.log_monster;
-        else if (!walking) sprite = LogMonsterSprite.log_monster;
-        else sprite = LogMonsterSprite.log_monster;
+        if (animate % 20 > 10 && walking) sprite = LogMonsterSprite.log_monsterSide_1;
+        else if (!walking) sprite = LogMonsterSprite.log_monsterSide;
+        else sprite = LogMonsterSprite.log_monsterSide_2;
 
-//        if (direction == Direction.North.ordinal()) {
-//            if (animate % 20 > 10 && walking) sprite = Sprite.playerForward_1;
-//            else if (!walking) sprite = Sprite.playerForward;
-//            else sprite = Sprite.playerForward_2;
-//        } else if (direction == Direction.South.ordinal()) {
-//            if (animate % 20 > 10 && walking) sprite = Sprite.playerBackward_1;
-//            else if (!walking) sprite = Sprite.playerBackward;
-//            else sprite = Sprite.playerBackward_2;
-//        } else if (direction == Direction.West.ordinal()) {
-//            xFlip = true;
-//        }
+        if (direction == Direction.North.ordinal()) {
+            if (animate % 20 > 10 && walking) sprite = LogMonsterSprite.log_monsterForward_1;
+            else if (!walking) sprite = LogMonsterSprite.log_monster;
+            else sprite = LogMonsterSprite.log_monsterForward_2;
+        } else if (direction == Direction.South.ordinal()) {
+            if (animate % 20 > 10 && walking) sprite = LogMonsterSprite.log_monsterBackward_1;
+            else if (!walking) sprite = LogMonsterSprite.log_monsterBackward;
+            else sprite = LogMonsterSprite.log_monsterBackward_2;
+        } else if (direction == Direction.West.ordinal()) {
+            xFlip = true;
+        }
         screen.renderMob(x, y, sprite, xFlip, yFlip, 0x0000);
 //        for (Projectile projectile: projectiles) {
 //            projectile.render(screen);
