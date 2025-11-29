@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable {
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     private Screen screen;
     private Level level;
-    private Player player;
+    public static Player player;
     private MonsterLog monster;
 
     public static int getWindowHeight() {

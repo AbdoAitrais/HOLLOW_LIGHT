@@ -6,6 +6,7 @@ import rais.gamedev.fromscratch.entity.projectile.Projectile;
 import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 import rais.gamedev.fromscratch.level.Level;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Mob extends Entity {
     public Sprite sprite;
     public int direction = 0; // determines the direction to which the playerForward moves ( North, East, South and West )
     public boolean moving = false;
+    public Point spawnPoint;
     public List<Projectile> projectiles = new ArrayList<>();
 
     // takes the amount by which the Mob's coordinates change in order to implement movement
