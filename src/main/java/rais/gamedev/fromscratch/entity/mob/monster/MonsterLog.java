@@ -11,17 +11,20 @@ import rais.gamedev.fromscratch.graphics.sprites.LogMonsterSprite;
 import rais.gamedev.fromscratch.graphics.sprites.Sprite;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.Random;
+import java.util.Vector;
 
 public class MonsterLog extends Mob {
     private Sprite sprite;
     private int animate = 0;
     private boolean walking = false;
-    private float wanderTimer = 10;
+    private float wanderTimer = 100;
     private int fireRate; //  represents a gun
-    private double aggroDistance = 10.0;
-    private Point currentTargetPoint;
+    private double aggroDistance = 100;
+    private Point currentTargetPoint = new Point(x+1000,y+1000);
     private MonsterState state = MonsterState.IDLE;
+    private double attackRange = 10.0;
 
     public MonsterLog() {
         sprite = LogMonsterSprite.log_monster;
@@ -59,20 +62,20 @@ public class MonsterLog extends Mob {
                 break;
 
             case WANDER:
-                wanderBehavior(wanderTimer);
+                wanderBehavior(0.1f);
                 if (seesPlayer()) changeState(MonsterState.CHASE);
                 break;
 
             case CHASE:
-                //chaseBehavior(dt);
+                chaseBehavior(0.1f);
                 break;
 
             case ATTACK:
-                //attackBehavior();
+                attackBehavior();
                 break;
 
             case RETURN:
-                //returnBehavior(dt);
+                returnBehavior(0.1f);
                 break;
         }
     }
@@ -111,13 +114,29 @@ public class MonsterLog extends Mob {
 
     void wanderBehavior(float dt) {
         wanderTimer -= dt;
-
+        System.out.println("wanderTimer: " + wanderTimer);
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
-            currentTargetPoint = randomNearbyPoint(spawnPoint, 50); // radius
-            wanderTimer = new Random().nextInt(3); // new goal every 1–3 seconds
+            currentTargetPoint = randomNearbyPoint(spawnPoint, 100); // radius
+            wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
         }
 
-        //moveTowards(currentTargetPoint, dt);
+        moveTowards(currentTargetPoint);
+    }
+
+    private void moveTowards(Point currentTargetPoint) {
+        double dx = currentTargetPoint.getX() - x;
+        double dy = currentTargetPoint.getY() - y;
+        double monsterPlayerAngle = Math.atan2(dy, dx);
+        // moving towards the target by using the angle of the vector between two points
+        // the 1.5 is for adjusting the cast into TODO::probably needs to be fixed by changing the move function from accepting integers to doubles
+        int xChange = (int) (Math.cos(monsterPlayerAngle) * 1.5), yChange = (int) (Math.sin(monsterPlayerAngle) * 1.5);
+        if (animate < Integer.MAX_VALUE) animate++;
+        else animate = 0;
+        // Only move if the playerForward actually moved
+        if (xChange != 0 || yChange != 0) {
+            walking = true;
+            move(xChange, yChange);
+        } else walking = false;
     }
 
     private Point randomNearbyPoint(Point spawnPoint, int i) {
@@ -140,24 +159,38 @@ public class MonsterLog extends Mob {
         return Math.sqrt((this.x - Game.player.x)*(this.x - Game.player.x) + (this.y - Game.player.y)*(this.y - Game.player.y));
     }
 
-//    void attackBehavior() {
-//        if (distanceToPlayer() > attackRange) {
-//            changeState(CHASE);
-//            return;
-//        }
-//
+    private Point getPlayerPosition() {
+        return new Point(Game.player.x, Game.player.y);
+    }
+
+    void chaseBehavior(float dt) {
+        moveTowards(getPlayerPosition());
+
+        if (distanceToPlayer() < attackRange)
+            changeState(MonsterState.ATTACK);
+
+        if (!seesPlayer())
+            changeState(MonsterState.RETURN);
+    }
+
+    void attackBehavior() {
+        if (distanceToPlayer() > attackRange) {
+            changeState(MonsterState.CHASE);
+            return;
+        }
+
 //        if (attackCooldown <= 0) {
 //            player.takeDamage(damage);
 //            attackCooldown = attackSpeed; // seconds
 //        }
-//    }
+    }
 
-//    void returnBehavior(float dt) {
-//        moveTowards(spawnPoint, dt);
-//
-//        if (distance(position, spawnPoint) < 5)
-//            changeState(WANDER);
-//    }
+    void returnBehavior(float dt) {
+        moveTowards(spawnPoint);
+
+        if (new Point(x,y).distance(spawnPoint) < 5)
+            changeState(MonsterState.WANDER);
+    }
 
 
 }

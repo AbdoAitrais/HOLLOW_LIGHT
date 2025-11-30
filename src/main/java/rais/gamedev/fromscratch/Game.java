@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         keyBoard = new KeyBoard();
         Point playerSpawnLocation = new Point(33*Level.TILE_SIZE,49*Level.TILE_SIZE); // TODO:: find out why player x and y correspond to pixels and not tiles
-        Point monsterSpawnLocation = new Point(32*Level.TILE_SIZE,48*Level.TILE_SIZE);
+        Point monsterSpawnLocation = new Point(32*Level.TILE_SIZE - 100,48*Level.TILE_SIZE - 100 );
 //        System.out.println(playerSpawnLocation);
         monster = new MonsterLog(monsterSpawnLocation.x,monsterSpawnLocation.y);
         player = new Player(playerSpawnLocation.x, playerSpawnLocation.y,keyBoard);

@@ -19,6 +19,7 @@ public class Mob extends Entity {
     public int direction = 0; // determines the direction to which the playerForward moves ( North, East, South and West )
     public boolean moving = false;
     public Point spawnPoint;
+    public double speed = 1.0;
     public List<Projectile> projectiles = new ArrayList<>();
 
     // takes the amount by which the Mob's coordinates change in order to implement movement
