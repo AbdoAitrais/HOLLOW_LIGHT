@@ -33,8 +33,8 @@ public class Mob extends Entity {
 
         if (xChange > 0) direction = Direction.East.ordinal();
         if (xChange < 0) direction = Direction.West.ordinal();
-        if (yChange > 0) direction = Direction.South.ordinal();
-        if (yChange < 0) direction = Direction.North.ordinal();
+        if (yChange > 0) direction = Direction.North.ordinal();
+        if (yChange < 0) direction = Direction.South.ordinal();
 
         if (!collision(xChange, yChange)) {
             x += xChange;

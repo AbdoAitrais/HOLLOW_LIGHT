@@ -62,12 +62,12 @@ public class MonsterLog extends Mob {
                 break;
 
             case WANDER:
-                wanderBehavior(0.1f);
+                wanderBehavior(10.0f);
                 if (seesPlayer()) changeState(MonsterState.CHASE);
                 break;
 
             case CHASE:
-                chaseBehavior(0.1f);
+                chaseBehavior(20.0f);
                 break;
 
             case ATTACK:
@@ -75,7 +75,7 @@ public class MonsterLog extends Mob {
                 break;
 
             case RETURN:
-                returnBehavior(0.1f);
+                returnBehavior(20.0f);
                 break;
         }
     }
@@ -114,29 +114,32 @@ public class MonsterLog extends Mob {
 
     void wanderBehavior(float dt) {
         wanderTimer -= dt;
-        System.out.println("wanderTimer: " + wanderTimer);
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
-            currentTargetPoint = randomNearbyPoint(spawnPoint, 100); // radius
+            currentTargetPoint = randomNearbyPoint(spawnPoint, 1000); // radius
             wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
         }
 
-        moveTowards(currentTargetPoint);
+        moveTowards(currentTargetPoint,dt);
     }
 
-    private void moveTowards(Point currentTargetPoint) {
-        double dx = currentTargetPoint.getX() - x;
-        double dy = currentTargetPoint.getY() - y;
-        double monsterPlayerAngle = Math.atan2(dy, dx);
-        // moving towards the target by using the angle of the vector between two points
-        // the 1.5 is for adjusting the cast into TODO::probably needs to be fixed by changing the move function from accepting integers to doubles
-        int xChange = (int) (Math.cos(monsterPlayerAngle) * 1.5), yChange = (int) (Math.sin(monsterPlayerAngle) * 1.5);
-        if (animate < Integer.MAX_VALUE) animate++;
-        else animate = 0;
-        // Only move if the playerForward actually moved
-        if (xChange != 0 || yChange != 0) {
-            walking = true;
-            move(xChange, yChange);
-        } else walking = false;
+    private void moveTowards(Point currentTargetPoint, float dt) {
+        wanderTimer -= dt;
+        if (wanderTimer <= 0 || reached(currentTargetPoint)) {
+            wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
+            double dx = currentTargetPoint.getX() - x;
+            double dy = currentTargetPoint.getY() - y;
+            double monsterPlayerAngle = Math.atan2(dy, dx);
+            // moving towards the target by using the angle of the vector between two points
+            // the 1.5 is for adjusting the cast into TODO::probably needs to be fixed by changing the move function from accepting integers to doubles
+            int xChange = (int) (Math.cos(monsterPlayerAngle) * 1.5), yChange = (int) (Math.sin(monsterPlayerAngle) * 1.5);
+            if (animate < Integer.MAX_VALUE) animate++;
+            else animate = 0;
+            // Only move if the playerForward actually moved
+            if (xChange != 0 || yChange != 0) {
+                walking = true;
+                move(xChange, yChange);
+            } else walking = false;
+        }
     }
 
     private Point randomNearbyPoint(Point spawnPoint, int i) {
@@ -164,7 +167,7 @@ public class MonsterLog extends Mob {
     }
 
     void chaseBehavior(float dt) {
-        moveTowards(getPlayerPosition());
+        moveTowards(getPlayerPosition(),dt);
 
         if (distanceToPlayer() < attackRange)
             changeState(MonsterState.ATTACK);
@@ -186,7 +189,7 @@ public class MonsterLog extends Mob {
     }
 
     void returnBehavior(float dt) {
-        moveTowards(spawnPoint);
+        moveTowards(spawnPoint,dt);
 
         if (new Point(x,y).distance(spawnPoint) < 5)
             changeState(MonsterState.WANDER);
