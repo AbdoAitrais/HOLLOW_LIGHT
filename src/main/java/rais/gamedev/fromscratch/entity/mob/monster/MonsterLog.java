@@ -4,16 +4,16 @@ import rais.gamedev.fromscratch.Game;
 import rais.gamedev.fromscratch.entity.mob.Direction;
 import rais.gamedev.fromscratch.entity.mob.Mob;
 import rais.gamedev.fromscratch.entity.mob.MonsterState;
-import rais.gamedev.fromscratch.entity.mob.player.Player;
 import rais.gamedev.fromscratch.entity.projectile.FireBolt;
 import rais.gamedev.fromscratch.graphics.Screen;
 import rais.gamedev.fromscratch.graphics.sprites.LogMonsterSprite;
 import rais.gamedev.fromscratch.graphics.sprites.Sprite;
+import rais.gamedev.fromscratch.level.Level;
+import rais.gamedev.fromscratch.level.Node;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 
 public class MonsterLog extends Mob {
     private Sprite sprite;
@@ -25,6 +25,8 @@ public class MonsterLog extends Mob {
     private Point currentTargetPoint = new Point(x+1000,y+1000);
     private MonsterState state = MonsterState.IDLE;
     private double attackRange = 10.0;
+    private List<Node> path;
+    private int timeSinceLastPath = 0;
 
     public MonsterLog() {
         sprite = LogMonsterSprite.log_monster;
@@ -122,23 +124,56 @@ public class MonsterLog extends Mob {
         moveTowards(currentTargetPoint,dt);
     }
 
+//    private void moveTowards(Point currentTargetPoint, float dt) {
+//        wanderTimer -= dt;
+//        if (wanderTimer <= 0 || reached(currentTargetPoint)) {
+//            wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
+//            double dx = currentTargetPoint.getX() - x;
+//            double dy = currentTargetPoint.getY() - y;
+//            double monsterPlayerAngle = Math.atan2(dy, dx);
+//            // moving towards the target by using the angle of the vector between two points
+//            // the 1.5 is for adjusting the cast into TODO::probably needs to be fixed by changing the move function from accepting integers to doubles
+//            int xChange = (int) (Math.cos(monsterPlayerAngle) * 1.5), yChange = (int) (Math.sin(monsterPlayerAngle) * 1.5);
+//            if (animate < Integer.MAX_VALUE) animate++;
+//            else animate = 0;
+//            // Only move if the playerForward actually moved
+//            if (xChange != 0 || yChange != 0) {
+//                walking = true;
+//                move(xChange, yChange);
+//            } else walking = false;
+//        }
+//    }
     private void moveTowards(Point currentTargetPoint, float dt) {
         wanderTimer -= dt;
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
             wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
-            double dx = currentTargetPoint.getX() - x;
-            double dy = currentTargetPoint.getY() - y;
-            double monsterPlayerAngle = Math.atan2(dy, dx);
-            // moving towards the target by using the angle of the vector between two points
-            // the 1.5 is for adjusting the cast into TODO::probably needs to be fixed by changing the move function from accepting integers to doubles
-            int xChange = (int) (Math.cos(monsterPlayerAngle) * 1.5), yChange = (int) (Math.sin(monsterPlayerAngle) * 1.5);
-            if (animate < Integer.MAX_VALUE) animate++;
-            else animate = 0;
-            // Only move if the playerForward actually moved
-            if (xChange != 0 || yChange != 0) {
-                walking = true;
-                move(xChange, yChange);
-            } else walking = false;
+            timeSinceLastPath++;
+            System.out.println(currentTargetPoint.x + " " + currentTargetPoint.y + " " + timeSinceLastPath);
+            // Recalculer le chemin vers le joueur toutes les 30 frames (0.5s)
+            if (timeSinceLastPath >= 30) {
+                timeSinceLastPath = 0;
+
+                // Convertir la position en pixels du monstre et du joueur en coordonnées de TUILES
+                int monsterTileX = this.x >> Level.TILE_SIZE_SHIFTING; // Même logique que ton render (x / 16)
+                int monsterTileY = this.y >> Level.TILE_SIZE_SHIFTING;
+                int playerTileX = currentTargetPoint.x >> Level.TILE_SIZE_SHIFTING;
+                int playerTileY = currentTargetPoint.y >> Level.TILE_SIZE_SHIFTING;
+
+                path = level.findPath(monsterTileX, monsterTileY, playerTileX, playerTileY);
+
+            }
+
+            // Déplacement le long du chemin
+            if (path != null && path.size() > 1) {
+                Node nextStep = path.get(1); // Le nœud 0 est la position actuelle du monstre
+
+                // Only move if the playerForward actually moved
+                if (nextStep.x != 0 || nextStep.y != 0) {
+                    walking = true;
+                    move(nextStep.x / Level.TILE_SIZE_SHIFTING, nextStep.y / Level.TILE_SIZE_SHIFTING);
+                } else walking = false;
+            }
+
         }
     }
 
