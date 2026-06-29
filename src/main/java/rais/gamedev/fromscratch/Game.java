@@ -16,7 +16,7 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
 
-    private static final int width = 300;
+    private static final int width = 300; // 600 near full screen
     private static final int height = width/ 16 * 9;
     private static final int scale = 3;
     public static String title = "Game";
@@ -49,6 +49,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(width, height);
 //        level = new RandomLevel(64, 64);
         level = new SpawnLevel("src/main/resources/maps/SimpleMap.tmj");
+        System.out.println("Loading Map Level With : "+ level.width + " height : " + level.height);
         frame = new JFrame();
         keyBoard = new KeyBoard();
         Point playerSpawnLocation = new Point(33*Level.TILE_SIZE,49*Level.TILE_SIZE); // TODO:: find out why player x and y correspond to pixels and not tiles

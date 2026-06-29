@@ -57,6 +57,7 @@ public class MonsterLog extends Mob {
 //    }
 
     public void update() {
+//        moveTowards(getPlayerPosition(),10.0f);
         switch(state) {
             case IDLE:
                 if (seesPlayer()) changeState(MonsterState.CHASE);
@@ -117,7 +118,7 @@ public class MonsterLog extends Mob {
     void wanderBehavior(float dt) {
         wanderTimer -= dt;
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
-            currentTargetPoint = randomNearbyPoint(spawnPoint, 1000); // radius
+            currentTargetPoint = randomNearbyPoint(spawnPoint, 5); // radius
             wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
         }
 
@@ -148,18 +149,19 @@ public class MonsterLog extends Mob {
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
             wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
             timeSinceLastPath++;
-            System.out.println(currentTargetPoint.x + " " + currentTargetPoint.y + " " + timeSinceLastPath);
+            System.out.println(currentTargetPoint.x / Level.TILE_SIZE + " " + currentTargetPoint.y / Level.TILE_SIZE + " " + timeSinceLastPath);
             // Recalculer le chemin vers le joueur toutes les 30 frames (0.5s)
             if (timeSinceLastPath >= 30) {
                 timeSinceLastPath = 0;
 
                 // Convertir la position en pixels du monstre et du joueur en coordonnées de TUILES
-                int monsterTileX = this.x >> Level.TILE_SIZE_SHIFTING; // Même logique que ton render (x / 16)
-                int monsterTileY = this.y >> Level.TILE_SIZE_SHIFTING;
-                int playerTileX = currentTargetPoint.x >> Level.TILE_SIZE_SHIFTING;
-                int playerTileY = currentTargetPoint.y >> Level.TILE_SIZE_SHIFTING;
+                int monsterTileX = this.x / Level.TILE_SIZE; // Même logique que ton render (x / 16)
+                int monsterTileY = this.y / Level.TILE_SIZE;
+                int playerTileX = currentTargetPoint.x / Level.TILE_SIZE;
+                int playerTileY = currentTargetPoint.y / Level.TILE_SIZE;
 
                 path = level.findPath(monsterTileX, monsterTileY, playerTileX, playerTileY);
+                level.logPath(path, monsterTileX, monsterTileY, playerTileX, playerTileY); // <--- LIGNE DE LOG
 
             }
 
@@ -170,7 +172,8 @@ public class MonsterLog extends Mob {
                 // Only move if the playerForward actually moved
                 if (nextStep.x != 0 || nextStep.y != 0) {
                     walking = true;
-                    move(nextStep.x / Level.TILE_SIZE_SHIFTING, nextStep.y / Level.TILE_SIZE_SHIFTING);
+                    System.out.println("moving:s " + nextStep.x / Level.TILE_SIZE + " " + nextStep.y / Level.TILE_SIZE);
+                    move(nextStep.x / Level.TILE_SIZE, nextStep.y / Level.TILE_SIZE);
                 } else walking = false;
             }
 

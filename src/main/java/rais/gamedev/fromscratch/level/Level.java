@@ -13,7 +13,7 @@ public class Level {
 
     public static final int TILE_SIZE = 16;
     public static final int TILE_SIZE_SHIFTING = (int) Math.sqrt(TILE_SIZE);
-    protected int width, height;
+    public int width, height;
     protected int[] baseLayerTiles;
     protected int[] secondLayerTiles;
     public List<Entity> entities = new ArrayList<>();
@@ -171,6 +171,23 @@ public class Level {
 //        if (secondTile != null && getSecondLayerTile(x,y).solid()) return true;
 
         return false;
+    }
+
+    public void logPath(List<Node> path, int startX, int startY, int targetX, int targetY) {
+        if (path == null) {
+            System.out.println("[PATH] Aucun chemin trouvé entre (" + startX + "," + startY + ") et (" + targetX + "," + targetY + ")");
+            return;
+        }
+
+        System.out.println("--- NOUVEAU CHEMIN CALCULÉ ---");
+        System.out.println("Départ : (" + startX + "," + startY + ") -> Cible : (" + targetX + "," + targetY + ")");
+        System.out.println("Nombre de tuiles à parcourir : " + path.size());
+
+        for (int i = 0; i < path.size(); i++) {
+            Node n = path.get(i);
+            System.out.println("  Étape " + i + " : Tuile(" + n.x + ", " + n.y + ") | Pixels attendus(" + (n.x << 4) + ", " + (n.y << 4) + ")");
+        }
+        System.out.println("--------------------------------");
     }
 
 }
