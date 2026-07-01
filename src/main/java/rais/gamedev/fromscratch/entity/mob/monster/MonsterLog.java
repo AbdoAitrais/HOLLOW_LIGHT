@@ -147,7 +147,7 @@ public class MonsterLog extends Mob {
     private void moveTowards(Point currentTargetPoint, float dt) {
         wanderTimer -= dt;
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
-            wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
+            wanderTimer = new Random().nextInt(50); // new goal every 1–3 seconds
             timeSinceLastPath++;
             // Convertir la position en pixels du monstre et du joueur en coordonnées de TUILES
             int monsterTileX = this.x / Level.TILE_SIZE; // Même logique que ton render (x / 16)
@@ -161,6 +161,7 @@ public class MonsterLog extends Mob {
 
 
                 path = level.findPath(monsterTileX, monsterTileY, playerTileX, playerTileY);
+                System.out.println("Monster : " + monsterTileX + " " + monsterTileY + " Player : " + playerTileX + " " + playerTileY);
                 level.logPath(path, monsterTileX, monsterTileY, playerTileX, playerTileY); // <--- LIGNE DE LOG
 
             }
@@ -232,8 +233,8 @@ public class MonsterLog extends Mob {
     void returnBehavior(float dt) {
         moveTowards(spawnPoint,dt);
 
-        if (new Point(x,y).distance(spawnPoint) < 5)
-            changeState(MonsterState.WANDER);
+        //if (new Point(x,y).distance(spawnPoint) < 5)
+            changeState(MonsterState.IDLE);
     }
 
 
