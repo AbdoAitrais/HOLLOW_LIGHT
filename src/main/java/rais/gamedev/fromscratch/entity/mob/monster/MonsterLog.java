@@ -149,16 +149,16 @@ public class MonsterLog extends Mob {
         if (wanderTimer <= 0 || reached(currentTargetPoint)) {
             wanderTimer = new Random().nextInt(100); // new goal every 1–3 seconds
             timeSinceLastPath++;
-            System.out.println(currentTargetPoint.x / Level.TILE_SIZE + " " + currentTargetPoint.y / Level.TILE_SIZE + " " + timeSinceLastPath);
+            // Convertir la position en pixels du monstre et du joueur en coordonnées de TUILES
+            int monsterTileX = this.x / Level.TILE_SIZE; // Même logique que ton render (x / 16)
+            int monsterTileY = this.y / Level.TILE_SIZE;
+            int playerTileX = currentTargetPoint.x / Level.TILE_SIZE;
+            int playerTileY = currentTargetPoint.y / Level.TILE_SIZE;
             // Recalculer le chemin vers le joueur toutes les 30 frames (0.5s)
-            if (timeSinceLastPath >= 30) {
+            if (timeSinceLastPath >= 20) {
                 timeSinceLastPath = 0;
 
-                // Convertir la position en pixels du monstre et du joueur en coordonnées de TUILES
-                int monsterTileX = this.x / Level.TILE_SIZE; // Même logique que ton render (x / 16)
-                int monsterTileY = this.y / Level.TILE_SIZE;
-                int playerTileX = currentTargetPoint.x / Level.TILE_SIZE;
-                int playerTileY = currentTargetPoint.y / Level.TILE_SIZE;
+
 
                 path = level.findPath(monsterTileX, monsterTileY, playerTileX, playerTileY);
                 level.logPath(path, monsterTileX, monsterTileY, playerTileX, playerTileY); // <--- LIGNE DE LOG
@@ -172,8 +172,11 @@ public class MonsterLog extends Mob {
                 // Only move if the playerForward actually moved
                 if (nextStep.x != 0 || nextStep.y != 0) {
                     walking = true;
-                    System.out.println("moving:s " + nextStep.x / Level.TILE_SIZE + " " + nextStep.y / Level.TILE_SIZE);
-                    move(nextStep.x / Level.TILE_SIZE, nextStep.y / Level.TILE_SIZE);
+                    System.out.println("moving: " + (int) Math.signum(nextStep.x - monsterTileX) + " " + (int) Math.signum(nextStep.y - monsterTileY));
+                    System.out.println("moving: " + (nextStep.x - monsterTileX) + " " + (nextStep.y - monsterTileY));
+                    System.out.println("x : " + nextStep.x + " y : " + nextStep.y);
+                    System.out.println("x : " + monsterTileX + " y : " + monsterTileY);
+                    move((int) Math.signum(nextStep.x - monsterTileX), (int) Math.signum(nextStep.y - monsterTileY));
                 } else walking = false;
             }
 
