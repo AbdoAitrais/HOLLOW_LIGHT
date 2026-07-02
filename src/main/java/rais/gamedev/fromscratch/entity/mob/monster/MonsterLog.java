@@ -161,7 +161,7 @@ public class MonsterLog extends Mob {
 
 
                 path = level.findPath(monsterTileX, monsterTileY, playerTileX, playerTileY);
-                System.out.println("Monster : " + monsterTileX + " " + monsterTileY + " Player : " + playerTileX + " " + playerTileY);
+//                System.out.println("Monster : " + monsterTileX + " " + monsterTileY + " Player : " + playerTileX + " " + playerTileY);
                 level.logPath(path, monsterTileX, monsterTileY, playerTileX, playerTileY); // <--- LIGNE DE LOG
 
             }
@@ -173,10 +173,11 @@ public class MonsterLog extends Mob {
                 // Only move if the playerForward actually moved
                 if (nextStep.x != 0 || nextStep.y != 0) {
                     walking = true;
-                    System.out.println("moving: " + (int) Math.signum(nextStep.x - monsterTileX) + " " + (int) Math.signum(nextStep.y - monsterTileY));
-                    System.out.println("moving: " + (nextStep.x - monsterTileX) + " " + (nextStep.y - monsterTileY));
-                    System.out.println("x : " + nextStep.x + " y : " + nextStep.y);
-                    System.out.println("x : " + monsterTileX + " y : " + monsterTileY);
+                    // Logging monster movement
+//                    System.out.println("moving: " + (int) Math.signum(nextStep.x - monsterTileX) + " " + (int) Math.signum(nextStep.y - monsterTileY));
+//                    System.out.println("moving: " + (nextStep.x - monsterTileX) + " " + (nextStep.y - monsterTileY));
+//                    System.out.println("x : " + nextStep.x + " y : " + nextStep.y);
+//                    System.out.println("x : " + monsterTileX + " y : " + monsterTileY);
                     move((int) Math.signum(nextStep.x - monsterTileX), (int) Math.signum(nextStep.y - monsterTileY));
                 } else walking = false;
             }
