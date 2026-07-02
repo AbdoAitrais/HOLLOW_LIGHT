@@ -79,13 +79,13 @@ public class Player extends Mob {
         else sprite = PlayerSprite.playerSide_2;
 
         if (direction == Direction.North.ordinal()) {
-            if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerForward_1;
-            else if (!walking) sprite = PlayerSprite.playerForward;
-            else sprite = PlayerSprite.playerForward_2;
-        } else if (direction == Direction.South.ordinal()) {
             if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerBackward_1;
             else if (!walking) sprite = PlayerSprite.playerBackward;
             else sprite = PlayerSprite.playerBackward_2;
+        } else if (direction == Direction.South.ordinal()) {
+            if (animate % 20 > 10 && walking) sprite = PlayerSprite.playerForward_1;
+            else if (!walking) sprite = PlayerSprite.playerForward;
+            else sprite = PlayerSprite.playerForward_2;
         } else if (direction == Direction.West.ordinal()) {
             xFlip = true;
         }
