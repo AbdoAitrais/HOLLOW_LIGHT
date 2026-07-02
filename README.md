@@ -63,5 +63,6 @@ Contributions are welcome! Here's how you can help:
 ---
 
 ## **Acknowledgments**
+- Special thanks to youtuber and developper [TheCherno](https://www.youtube.com/@TheCherno) for his courses and videos about game development.
 - Special thanks to the developers of [Tiled](https://www.mapeditor.org/) for their awesome map editor.
 - Inspired by classic tile-based games like *Zelda* and *Pokémon*.
