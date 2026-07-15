@@ -12,12 +12,12 @@ Welcome to **Hollow light**, a 2D tile-based game where idea the mechanics are n
 - **Player movement** and interaction with a tile-based grid.
 - Customizable **map design** using the Tiled editor.
 - Efficient rendering with optimized performance.
-- Extendable for future features like collision detection and animations.
+- Extendable for future features like mobs ai and combat systems.
 
 ---
 
 ## **Technologies Used**
-- **Programming Language:** Java (or your language of choice)
+- **Programming Language:** Java
 - **Rendering:** Custom rendering logic with tile-based mechanics
 - **Map Editor:** [Tiled](https://www.mapeditor.org/)
 - **File Format:** JSON for importing and parsing map data
@@ -28,7 +28,7 @@ Welcome to **Hollow light**, a 2D tile-based game where idea the mechanics are n
 ## **How to Customize Maps**
 
 1. Open the **Tiled** map editor.
-2. Create or edit your map using a tileset.
+2. Create or edit your map using the tile set in the ressources folder "src/main/resources/textures/gfx/Overworld.png" (make sure its 64x64 dimension).
 3. Export the map as a `.json` file.
 4. Replace the `map.json` file in the `resources` folder with your new map.
 5. Run the game to see your new world in action.
@@ -50,6 +50,7 @@ tile-based-adventure/
 ## **Planned Features**
 - **Items and Inventory**: Allow players to collect items.
 - **Enemy AI**: Introduce NPCs or enemies with simple AI.
+- **Combat system**: Introduce a combat system with enemy mobs.
 
 ---
 
