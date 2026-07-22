@@ -3,8 +3,8 @@
 ![Game Screenshot](src/main/resources/screenshots/game.png) <!-- Replace with the actual path to a screenshot of your game -->
 
 ## **Overview**
-
-# Welcome to **Hollow light**, a 2D tile-based game where idea the mechanics are not yet determined i am just having fun experimenting with game dev no particular idea is set yet
+---
+Welcome to **Hollow light**, a 2D tile-based game where idea the mechanics are not yet determined i am just having fun experimenting with game dev no particular idea is set yet
 ---
 
 ## **Features**
